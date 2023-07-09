@@ -1,1 +1,3 @@
-print "Hello from init.lua"
+require "config.options"
+require "config.lazy"
+
