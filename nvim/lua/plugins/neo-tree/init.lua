@@ -3,8 +3,9 @@ return {
     branch = "v3.x",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+        "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
+        "s1n7ax/nvim-window-picker",
     },
     keys = {
         { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle Neotree" },
@@ -68,7 +69,7 @@ return {
                     }
                 },
                 group_empty_dirs = true,
-                use_libuv_file_watcher = false,
+                use_libuv_file_watcher = true,
                 async_directory_scan = "auto",
                 scan_mode = "deep",
                 components = {
