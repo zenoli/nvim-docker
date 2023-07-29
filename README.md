@@ -3,9 +3,11 @@
 ## Setup
 
 Build: `docker build -t neovim-docker .`
-Run:
+Run: `./scripts/zenovim-launch.sh`
 
-```
+This is a simple wrapper around running the docker image as follows:
+
+```shell
 docker run \
     -it \
     --rm \
@@ -14,5 +16,11 @@ docker run \
     neovim-docker
 ```
 
-Attach to running container: `docker exec -it zenovim bash`
+Attach to running container: `./scripts/zenovim-attach.sh`
 
+This is a wrapper script calling:
+
+`docker exec -it zenovim bash`
+
+
+Hello
