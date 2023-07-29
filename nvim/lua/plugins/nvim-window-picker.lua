@@ -21,14 +21,9 @@ return {
         },
         highlights = {
             statusline = {
-                focused = {
-                    fg = '#ededed',
-                    bg = '#4493c8',
-                    bold = true,
-                },
                 unfocused = {
                     fg = '#ededed',
-                    bg = '#44cc41',
+                    bg = '#4493c8',
                     bold = true,
                 },
             },
