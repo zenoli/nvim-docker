@@ -15,6 +15,7 @@ return {
             cut = "󰆐 ",
             copy = "󰆏 ",
         }
+
         local navigation = require "plugins.neo-tree.navigation"
         return {
             close_if_last_window = true,
