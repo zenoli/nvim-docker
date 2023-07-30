@@ -31,7 +31,17 @@ return {
         }
     },
     config = function(_, opts)
+        local utils = require "config.utils"
         local lsp_utils = require "plugins.lsp.utils"
+
+        local path = "lua/plugins/lsp/server-settings"
+        local stats = utils.read_dir(path)
+        for _, setting in ipairs(stats) do
+            local module_name = string.gsub(setting.name, ".lua", "")
+            require("plugins/lsp/server-settings/" .. module_name)
+        end
+
+
         vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('UserLspConfig', {}),
             callback = require("plugins.lsp.keybindings").on_attach
