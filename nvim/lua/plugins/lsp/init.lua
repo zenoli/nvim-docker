@@ -41,19 +41,13 @@ return {
         lsp_utils.setup_diagnostics(opts.diagnostics)
         lsp_utils.setup_borders(opts.border)
 
-
-        local servers = require("mason-lspconfig").get_installed_servers()
-        local skipped_servers = { "jdtls", "tsserver" }
-        local filtered_servers = vim.tbl_filter(
+        require("mason-lspconfig").setup_handlers({
             function(server)
-                return not vim.tbl_contains(skipped_servers, server)
+                require("lspconfig")[server].setup(lsp_utils.get_server_opts(server))
             end,
-            servers
-        )
-
-        for _, server in pairs(filtered_servers) do
-            require("lspconfig")[server].setup(lsp_utils.get_server_opts(server))
-        end
-
+            ["jdtls"] = function()
+                -- TODO
+            end
+        })
     end
 }
