@@ -15,4 +15,12 @@ function M.setup_borders(border)
         vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 end
 
+function M.get_server_opts(server)
+    local has_server_module, server_module =
+        pcall(require, "plugins.lsp.servers." .. server)
+    if has_server_module then
+        return server_module.opts or {}
+    end
+end
+
 return M
