@@ -1,9 +1,9 @@
 return {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "folke/tokyonight.nvim" },
+    event = "VeryLazy",
     opts = {
         options = {
-            theme = "tokyonight",
+            theme = "auto",
             disabled_filetypes = {
                 statusline = { "neo-tree", "calendar" },
                 winbar = {},

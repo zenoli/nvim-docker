@@ -1,7 +1,7 @@
 local M = {}
 
-local function get_server_module(server)
-    local _, server_module = pcall(require, "plugins.lsp.servers." .. server)
+local function get_server_config(server)
+    local _, server_module = pcall(require, "plugins.lsp.servers." .. server .. ".config")
     local default = {
         setup = Noop,
         opts = {}
@@ -30,7 +30,7 @@ function M.get_global_opts()
 end
 
 function M.default_handler(server)
-    local server_module = get_server_module(server)
+    local server_module = get_server_config(server)
     server_module.setup()
 
     require("lspconfig")[server].setup(vim.tbl_deep_extend(

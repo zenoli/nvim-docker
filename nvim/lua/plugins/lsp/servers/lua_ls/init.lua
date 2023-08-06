@@ -1,21 +1,11 @@
-local M = {}
-
-function M.setup()
-    -- lazy load neodev
-    require("neodev")
-end
-
-M.opts = {
-    settings = {
-        Lua = {
-            workspace = {
-                checkThirdParty = false,
-            },
-            completion = {
-                callSnippet = "Replace",
-            },
-        },
-    },
+return {
+    "folke/neodev.nvim",
+    lazy = true,
+    opts = {
+        library = {
+            runtime = false,
+            plugins = false,
+            types = true
+        }
+    }
 }
-
-return M
