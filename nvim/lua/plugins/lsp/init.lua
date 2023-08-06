@@ -42,9 +42,7 @@ return {
         lsp_utils.setup_borders(opts.border)
 
         require("mason-lspconfig").setup_handlers({
-            function(server)
-                require("lspconfig")[server].setup(lsp_utils.get_server_opts(server))
-            end,
+            lsp_utils.default_handler,
             ["jdtls"] = function()
                 -- TODO
             end

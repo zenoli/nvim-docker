@@ -1,5 +1,14 @@
 local M = {}
 
+local function get_server_module(server)
+    local _, server_module = pcall(require, "plugins.lsp.servers." .. server)
+    local default = {
+        setup = Noop,
+        opts = {}
+    }
+    return vim.tbl_extend("force", default, server_module or {})
+end
+
 function M.setup_diagnostics(opts)
     for _, sign in ipairs(opts.signs) do
         vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
@@ -15,12 +24,21 @@ function M.setup_borders(border)
         vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 end
 
-function M.get_server_opts(server)
-    local has_server_module, server_module =
-        pcall(require, "plugins.lsp.servers." .. server)
-    if has_server_module then
-        return server_module.opts or {}
-    end
+function M.get_global_opts()
+    -- TODO
+    return {}
 end
+
+function M.default_handler(server)
+    local server_module = get_server_module(server)
+    server_module.setup()
+
+    require("lspconfig")[server].setup(vim.tbl_deep_extend(
+        "force",
+        M.get_global_opts(),
+        server_module.opts
+    ))
+end
+
 
 return M
