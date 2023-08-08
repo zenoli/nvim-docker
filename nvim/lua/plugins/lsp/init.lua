@@ -6,6 +6,7 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
+            "folke/neoconf.nvim",
         },
         event = { "BufReadPre", "BufNewFile" },
         opts = {
@@ -35,6 +36,7 @@ return {
         },
         config = function(_, opts)
             local lsp_utils = require "plugins.lsp.utils"
+            require("neoconf").setup()
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('UserLspConfig', {}),
