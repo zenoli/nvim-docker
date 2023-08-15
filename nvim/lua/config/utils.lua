@@ -13,4 +13,8 @@ function M.read_dir(path)
     )
 end
 
+function test()
+    return "/home/dev/awesome/layouts.lua"
+end
+
 return M
