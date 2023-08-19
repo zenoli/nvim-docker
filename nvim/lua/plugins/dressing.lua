@@ -2,14 +2,17 @@ return {
     "stevearc/dressing.nvim",
     lazy = true,
     init = function()
-        -- This was taken from LazyVim. In case this causes issues in the future,
+        -- This was adapted from LazyVim. In case this causes issues in the future,
         -- fallback to using the `VeryLazy` event for deferred loading
-        vim.ui.select = function(...)
+        local function load()
             require "lazy".load { plugins = { "dressing.nvim" } }
+        end
+        vim.ui.select = function(...)
+            load()
             return vim.ui.select(...)
         end
         vim.ui.input = function(...)
-            require "lazy".load { plugins = { "dressing.nvim" } }
+            load()
             return vim.ui.input(...)
         end
     end,
