@@ -1,5 +1,6 @@
 local options = {
     cursorline = true,
+    showmode = false,
 
     number = true,
     relativenumber = true,

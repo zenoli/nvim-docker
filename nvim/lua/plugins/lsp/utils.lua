@@ -1,7 +1,7 @@
 local M = {}
 
 local function get_server_config(server)
-    local _, server_module = pcall(require, "plugins.lsp.servers." .. server .. ".config")
+    local _, server_module = pcall(require, "plugins.lsp.servers." .. server)
     local default = {
         setup = Noop,
         opts = {},
