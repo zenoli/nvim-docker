@@ -5,7 +5,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "folke/neoconf.nvim",
     },
-    import = "plugins.lsp.dependencies",
+    import = "plugins.lsp.aux",
     event = { "BufReadPre", "BufNewFile" },
     opts = function()
         local border = "rounded"

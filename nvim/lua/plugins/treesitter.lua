@@ -23,6 +23,7 @@ return {
             "vim",
             "bash",
             "css",
+            "markdown"
         },
         indent = {
             enable = true,
