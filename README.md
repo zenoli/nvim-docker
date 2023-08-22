@@ -2,25 +2,13 @@
 
 ## Setup
 
-Build: `docker build -t neovim-docker .`
-Run: `./scripts/zenovim-launch.sh`
+Build: `./scripts/zenovim-build.sh [TAG]` - Builds the image
+Run: `./scripts/zenovim-launch.sh [TAG]` - Runs the image
+Attach: `./scripts/zenovim-attach.sh` - Attaches to the running image with `bash`
 
-This is a simple wrapper around running the docker image as follows:
-
-```shell
-docker run \
-    -it \
-    --rm \
-    --mount type=bind,source="$(pwd)"/nvim,target=/home/dev/.config/nvim \
-    --name zenovim \
-    neovim-docker
-```
-
-Attach to running container: `./scripts/zenovim-attach.sh`
-
-This is a wrapper script calling:
-
-`docker exec -it zenovim bash`
+### Tags
+Currently we provide two tags:
+- `arch` - Based on archlinux
+- `alpine` - Based on alpine linux
 
 
-Hello

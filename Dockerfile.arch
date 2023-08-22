@@ -1,0 +1,34 @@
+FROM archlinux:base-devel
+
+# Install packages
+ENV PACKAGES " \
+  curl \
+  fd \
+  gcc \
+  git \
+  make \
+  neovim \
+  nodejs \
+  npm \
+  python \
+  python-pynvim \
+  ripgrep \
+  unzip \
+  wget \
+"
+
+RUN pacman-key --init
+RUN pacman -Syu --noconfirm $PACKAGES
+
+# Create user
+RUN groupadd --gid 1000 dev \
+  && useradd --uid 1000 --gid dev --shell /bin/bash --create-home dev
+RUN chown -R dev:dev /home/dev
+USER dev
+
+# Copy playground apps
+COPY --chown=dev awesome /home/dev/awesome
+COPY python-pg /home/dev/python-pg
+
+WORKDIR /home/dev
+CMD ["nvim"]

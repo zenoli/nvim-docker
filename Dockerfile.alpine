@@ -1,0 +1,36 @@
+FROM alpine:edge
+
+# Install packages
+ENV PACKAGES " \
+  bash \
+  curl \
+  fd \
+  gcc \
+  git \
+  gzip \
+  make \
+  musl-dev \
+  neovim \
+  nodejs \
+  npm \
+  py3-pip \
+  py3-pynvim \
+  python3 \
+  ripgrep \
+  tar \
+  unzip \
+  wget \
+"
+
+RUN apk add --no-cache $PACKAGES
+
+# Create user
+RUN adduser -D dev
+USER dev
+
+# Copy playground apps
+COPY awesome /home/dev/awesome
+COPY python-pg /home/dev/python-pg
+
+WORKDIR /home/dev
+CMD ["nvim"]
