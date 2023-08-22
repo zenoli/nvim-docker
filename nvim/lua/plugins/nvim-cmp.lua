@@ -70,4 +70,10 @@ return {
             sorting = defaults.sorting,
         }
     end,
+    config = function(_, opts)
+        local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+        local cmp = require "cmp"
+        cmp.setup(opts)
+        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    end,
 }

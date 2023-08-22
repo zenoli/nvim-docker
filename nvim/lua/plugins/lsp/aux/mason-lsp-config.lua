@@ -4,7 +4,8 @@ return {
     build = Noop, -- This ensures that mason-lspconfig is loaded on a clean install
     opts = {
         ensure_installed = {
-            "lua_ls"
+            "lua_ls",
+            "pyright"
         }
     },
 }
