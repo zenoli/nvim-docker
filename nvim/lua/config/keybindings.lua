@@ -4,7 +4,7 @@ local map = require "config.utils".getMapFn()
 vim.g.mapleader = [[ ]]      -- Use space as leader
 vim.g.maplocalleader = [[\]] -- Use backslash as localleader
 
--- map("", "<space>", "<nop>") -- disable space because leader
+map("", "<space>", "<nop>") -- disable space because leader
 map("n", "q:", "<nop>")
 
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit current window" })
