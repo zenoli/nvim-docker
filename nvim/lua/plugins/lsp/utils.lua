@@ -1,12 +1,12 @@
 local M = {}
 
 local function get_server_config(server)
-    local _, server_module = pcall(require, "plugins.lsp.servers." .. server)
+    local module_found, server_module = pcall(require, "plugins.lsp.servers." .. server)
     local default = {
         setup = Noop,
         opts = {},
     }
-    return vim.tbl_extend("force", default, server_module or {})
+    return vim.tbl_extend("force", default, module_found and server_module or {})
 end
 
 function M.setup_diagnostics(opts)
@@ -36,7 +36,13 @@ function M.default_handler(server)
     local server_module = get_server_config(server)
     server_module.setup()
 
-    require "lspconfig"[server].setup(vim.tbl_deep_extend("force", M.get_global_opts(), server_module.opts))
+    require "lspconfig"[server].setup(
+        vim.tbl_deep_extend(
+            "force",
+            M.get_global_opts(),
+            server_module.opts
+        )
+    )
 end
 
 return M
