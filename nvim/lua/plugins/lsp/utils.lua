@@ -21,14 +21,15 @@ function M.setup_borders(border)
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 end
 
-function M.get_global_opts()
-    local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+function M.get_global_opts(server)
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    if status_ok then
-        capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-    else
-        vim.notify("cmp_nvim_lsp is not installed...", vim.log.levels.WARN)
-    end
+    require("config.utils").if_module(
+        "cmp_nvim_lsp",
+        function(cmp_nvim_lsp)
+            capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+        end,
+        { message = "Required for setting up " .. server }
+    )
     return { capabilities = capabilities }
 end
 
@@ -39,7 +40,7 @@ function M.default_handler(server)
     require "lspconfig"[server].setup(
         vim.tbl_deep_extend(
             "force",
-            M.get_global_opts(),
+            M.get_global_opts(server),
             server_module.opts
         )
     )

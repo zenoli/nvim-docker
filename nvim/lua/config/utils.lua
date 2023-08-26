@@ -21,8 +21,18 @@ function M.read_dir(path)
     )
 end
 
-function test()
-    return "/home/dev/awesome/layouts.lua"
+function M.if_module(module_name, cb, opts)
+    opts = opts or {}
+    local status_ok, module = pcall(require, module_name)
+    if status_ok then
+        cb(module)
+    elseif not opts.silent then
+        local messages = { "Failed to load module " .. module_name }
+        if opts.message then
+            table.insert(messages, opts.message)
+        end
+        vim.notify(messages, vim.log.levels.WARN)
+    end
 end
 
 return M

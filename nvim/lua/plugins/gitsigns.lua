@@ -33,6 +33,7 @@ return {
             map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset buffer" })
             map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Unstage hunk" })
             map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
+            map("n", "<leader>hd", gs.preview_hunk_inline, { desc = "Diff hunk inline" })
             map("n", "<leader>hb", function() gs.blame_line { full = true } end, { desc = "Git blame" })
             map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Toggle line blame" })
 
