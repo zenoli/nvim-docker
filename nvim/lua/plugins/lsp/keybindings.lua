@@ -1,27 +1,25 @@
 return {
-    on_attach = function(attachEvent)
-        -- Mapings.
-        local map = require("config.utils").map
-        local opts = { buffer = attachEvent.buf }
+    setup = function(buf)
+        local map = require("config.utils").getMapFn({ buffer = buf })
 
-        map("n", "K", vim.lsp.buf.hover)
-        map("n", "gi", vim.lsp.buf.implementation, opts)
-        map("n", "<leader>ld", function() vim.diagnostic.open_float { scope = "line" } end, opts)
-        map("n", "<leader>cd", function() vim.diagnostic.open_float { scope = "cursor" } end, opts)
-        map("n", "<leader>rn", vim.lsp.buf.rename, opts)
-        map("n", "<leader>F", vim.lsp.buf.format, opts)
-        map("n", "<space>gd", vim.lsp.buf.type_definition, opts)
-        map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-        map("n", "<leader>sd", function() require("telescope.builtin").diagnostics() end, opts)
-        map("n", "gr", function() require("telescope.builtin").lsp_references() end, opts)
-        map("n", "gd", function() require("telescope.builtin").lsp_definitions() end, opts)
+        map("n", "K", vim.lsp.buf.hover, { desc = "Lsp hover" })
+        map("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation"})
+        map("n", "<leader>ld", function() vim.diagnostic.open_float { scope = "line" } end, { desc = "Show line diagnostics" })
+        map("n", "<leader>cd", function() vim.diagnostic.open_float { scope = "cursor" } end, { desc = "Show cursor diagnostics" })
+        map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
+        map("n", "<leader>F", vim.lsp.buf.format, { desc = "Format document" })
+        map("n", "<space>gd", vim.lsp.buf.type_definition, { desc = "Goto definition" })
+        map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+        map("n", "<leader>sd", function() require("telescope.builtin").diagnostics() end, { desc = "Search diagnostics" })
+        map("n", "gr", function() require("telescope.builtin").lsp_references() end, { desc = "Goto references"})
+        map("n", "gd", function() require("telescope.builtin").lsp_definitions() end, { desc = "Godo definition" })
         map(
             "n",
             "gD",
             function() require("telescope.builtin").lsp_definitions { jump_type = "vsplit" } end,
-            opts
+            { desc = "Goto definition in split" }
         )
-        map("n", "[d", vim.diagnostic.goto_prev)
-        map("n", "]d", vim.diagnostic.goto_next)
+        map("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic" })
+        map("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic" })
     end,
 }

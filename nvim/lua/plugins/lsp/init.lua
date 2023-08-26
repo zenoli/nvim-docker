@@ -41,7 +41,10 @@ return {
 
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-            callback = require "plugins.lsp.keybindings".on_attach,
+            callback = function(attachEvent)
+                vim.print(attachEvent)
+                require("plugins.lsp.keybindings").setup(attachEvent.buf)
+            end
         })
 
         lsp_utils.setup_diagnostics(opts.diagnostics)
