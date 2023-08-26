@@ -12,5 +12,8 @@ return {
     config = function()
         require "plugins.dap.debug-signs".setup()
         require "plugins.dap.utils".register_dapui_handlers()
+
+        -- Adapters
+        require "plugins.dap.adapters.bash".setup()
     end,
 }

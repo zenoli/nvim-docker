@@ -42,7 +42,6 @@ return {
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(attachEvent)
-                vim.print(attachEvent)
                 require("plugins.lsp.keybindings").setup(attachEvent.buf)
             end
         })

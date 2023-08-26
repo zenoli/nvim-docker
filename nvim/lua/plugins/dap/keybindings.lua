@@ -30,6 +30,13 @@ return {
         desc = "Debug start/continue",
     },
     {
+        "<leader>dl",
+        function()
+            require "dap".run_last()
+        end,
+        desc = "Run last debug configuration",
+    },
+    {
         "<leader>dw",
         function()
             utils.focus_dapui_window "Watches"
@@ -68,6 +75,7 @@ return {
         "<leader>dq",
         function()
             require "dap".terminate()
+            require "dapui".close()
         end,
         desc = "Quit debugger",
     },

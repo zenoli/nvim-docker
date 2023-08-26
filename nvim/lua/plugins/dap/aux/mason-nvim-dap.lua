@@ -4,6 +4,7 @@ return {
     build = Noop,
     opts = {
         ensure_installed = {
+            "bash",
             "python",
         },
     }
