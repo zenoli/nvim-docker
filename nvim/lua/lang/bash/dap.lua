@@ -3,7 +3,6 @@ local bash_debug_adapter_path = require("plugins.mason.utils").mason_package_pat
     .. "/bash-debug-adapter/extension/bashdb_dir"
 return {
     "mfussenegger/nvim-dap",
-    dependencies = { "jbyuki/one-small-step-for-vimkind" },
     opts = {
         adapters = {
             bashdb = {

@@ -11,14 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
 require("lazy").setup(
     {
-        spec = require("config.utils").generate_import_specs(
-            "bash",
-            "lua",
-            "python"
-        ),
+        spec = require("config.utils").generate_import_specs(),
         install = { colorscheme = { "tokyonight" } },
         ui = {
             border = "rounded",
