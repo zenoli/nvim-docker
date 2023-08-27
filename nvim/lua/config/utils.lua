@@ -16,9 +16,7 @@ end
 
 function M.read_dir(path)
     local uv = vim.loop
-    return uv.fs_readdir(
-        uv.fs_opendir(vim.fn.stdpath("config") .. "/" .. path, nil, 1000)
-    )
+    return uv.fs_readdir(uv.fs_opendir(vim.fn.stdpath("config") .. "/" .. path, nil, 1000))
 end
 
 function M.if_module(module_name, cb, opts)
@@ -33,6 +31,15 @@ function M.if_module(module_name, cb, opts)
         end
         vim.notify(messages, vim.log.levels.WARN)
     end
+end
+
+function M.generate_import_specs(...)
+    local specs = { { import = "plugins" } }
+    for i, v in ipairs({ ... }) do
+        table.insert(specs, { import = "lang." .. v })
+        table.insert(specs, { import = "lang." .. v .. ".plugins" })
+    end
+    return specs
 end
 
 return M

@@ -1,12 +1,12 @@
 local M = {}
 
-local function get_server_config(server)
-    local module_found, server_module = pcall(require, "plugins.lsp.servers." .. server)
-    local default = {
-        setup = Noop,
-        opts = {},
-    }
-    return vim.tbl_extend("force", default, module_found and server_module or {})
+function M.setup_keybindings()
+    vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = function(attachEvent)
+            require("plugins.lsp.keybindings").setup(attachEvent.buf)
+        end,
+    })
 end
 
 function M.setup_diagnostics(opts)
@@ -21,29 +21,30 @@ function M.setup_borders(border)
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 end
 
-function M.get_global_opts(server)
+function M.get_global_opts()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    require("config.utils").if_module(
-        "cmp_nvim_lsp",
-        function(cmp_nvim_lsp)
-            capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-        end,
-        { message = "Required for setting up " .. server }
-    )
+    require("config.utils").if_module("cmp_nvim_lsp", function(cmp_nvim_lsp)
+        capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+    end, { message = "Required for setting global lsp options" })
     return { capabilities = capabilities }
 end
 
-function M.default_handler(server)
-    local server_module = get_server_config(server)
-    server_module.setup()
+local function get_server_config(opts, server)
+    local default = {
+        setup = Noop,
+        opts = {},
+    }
+    return vim.tbl_extend("force", default, opts.servers[server] or {})
+end
 
-    require "lspconfig"[server].setup(
-        vim.tbl_deep_extend(
-            "force",
-            M.get_global_opts(server),
-            server_module.opts
-        )
-    )
+function M.get_default_handler(opts)
+    local global_opts = M.get_global_opts()
+    return function(server)
+        local server_config = get_server_config(opts, server)
+        server_config.setup()
+
+        require("lspconfig")[server].setup(vim.tbl_deep_extend("force", global_opts, server_config.opts))
+    end
 end
 
 return M

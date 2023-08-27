@@ -1,21 +1,21 @@
-local M = {}
+-- local M = {}
 
-function M.setup()
-    -- lazy load neodev
-    require("neodev")
-end
+-- function M.setup()
+--     -- lazy load neodev
+--     require("neodev")
+-- end
 
-M.opts = {
-    settings = {
-        Lua = {
-            workspace = {
-                checkThirdParty = false,
-            },
-            completion = {
-                callSnippet = "Replace",
-            },
-        },
-    },
-}
+-- M.opts = {
+--     settings = {
+--         Lua = {
+--             workspace = {
+--                 checkThirdParty = false,
+--             },
+--             completion = {
+--                 callSnippet = "Replace",
+--             },
+--         },
+--     },
+-- }
 
-return M
+-- return M

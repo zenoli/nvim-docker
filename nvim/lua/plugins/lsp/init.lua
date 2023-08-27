@@ -3,11 +3,10 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "folke/neoconf.nvim",
     },
     import = "plugins.lsp.aux",
     event = { "BufReadPre", "BufNewFile" },
-    opts = function()
+    opts = (function()
         local border = "rounded"
         return {
             border = border,
@@ -34,23 +33,15 @@ return {
                 },
             },
         }
-    end,
+    end)(),
     config = function(_, opts)
         local lsp_utils = require "plugins.lsp.utils"
-        require "neoconf".setup()
-
-        vim.api.nvim_create_autocmd("LspAttach", {
-            group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-            callback = function(attachEvent)
-                require("plugins.lsp.keybindings").setup(attachEvent.buf)
-            end
-        })
-
+        lsp_utils.setup_keybindings()
         lsp_utils.setup_diagnostics(opts.diagnostics)
         lsp_utils.setup_borders(opts.border)
 
         require "mason-lspconfig".setup_handlers {
-            lsp_utils.default_handler,
+            lsp_utils.get_default_handler(opts),
             ["jdtls"] = function()
                 -- TODO
             end,
