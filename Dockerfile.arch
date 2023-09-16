@@ -11,6 +11,7 @@ ENV PACKAGES " \
   nodejs \
   npm \
   python \
+  python-pip \
   python-pynvim \
   ripgrep \
   unzip \
@@ -28,7 +29,7 @@ USER dev
 
 # Copy playground apps
 COPY --chown=dev awesome /home/dev/awesome
-COPY python-pg /home/dev/python-pg
+COPY --chown=dev python-pg /home/dev/python-pg
 
 WORKDIR /home/dev
 CMD ["nvim"]
