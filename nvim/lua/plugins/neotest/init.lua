@@ -4,16 +4,18 @@ return {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "antoinemadec/FixCursorHold.nvim",
-        "nvim-neotest/neotest-python",
     },
     keys = require "plugins.neotest.keybindings",
-    config = function()
+    config = function(_, opts)
+        local adapters = {}
+
+        for name, config in pairs(opts.adapters or {}) do
+            local adapter = require(name)(config)
+            adapters[#adapters + 1] = adapter
+        end
+
         require "neotest".setup {
-            adapters = {
-                require "neotest-python" {
-                    dap = { justMyCode = false },
-                },
-            },
+            adapters = adapters
         }
     end,
 }

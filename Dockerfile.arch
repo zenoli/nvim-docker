@@ -12,6 +12,7 @@ ENV PACKAGES " \
   npm \
   python \
   python-pip \
+  python-pipx \
   python-pynvim \
   ripgrep \
   unzip \
