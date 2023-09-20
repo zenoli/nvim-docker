@@ -3,6 +3,7 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+        "creativenull/efmls-configs-nvim",
     },
     import = "plugins.lsp.aux",
     event = { "BufReadPre", "BufNewFile" },
@@ -44,6 +45,28 @@ return {
             lsp_utils.get_default_handler(opts),
             ["jdtls"] = function()
                 -- TODO
+            end,
+            ["efm"] = function()
+                local black = require('efmls-configs.formatters.black')
+                local isort = require('efmls-configs.formatters.isort')
+                local languages = {
+                    python = { isort, black },
+                }
+                print("Setting up efm")
+
+                local efmls_config = {
+                    filetypes = vim.tbl_keys(languages),
+                    settings = {
+                        rootMarkers = { ".git/" },
+                        languages = languages,
+                    },
+                    init_options = {
+                        documentFormatting = true,
+                        documentRangeFormatting = true,
+                    },
+                }
+                local global_opts = lsp_utils.get_global_opts()
+                require('lspconfig').efm.setup(vim.tbl_extend("force", global_opts, efmls_config))
             end,
         }
     end,

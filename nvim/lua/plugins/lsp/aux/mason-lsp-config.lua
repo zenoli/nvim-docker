@@ -5,6 +5,7 @@ return {
     opts = {
         ensure_installed = {
             "bashls",
+            "efm",
             "lua_ls",
             "pyright",
         },

@@ -12,3 +12,5 @@ Currently we provide two tags:
 - `alpine` - Based on alpine linux
 
 
+### Running container as root
+`docker exec -u 0 -it zenovim bash`

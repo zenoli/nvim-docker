@@ -6,6 +6,7 @@ ENV PACKAGES " \
   fd \
   gcc \
   git \
+  go \
   make \
   neovim \
   nodejs \
@@ -33,4 +34,5 @@ COPY --chown=dev awesome /home/dev/awesome
 COPY --chown=dev python-pg /home/dev/python-pg
 
 WORKDIR /home/dev
+RUN mkdir .config
 CMD ["nvim"]
