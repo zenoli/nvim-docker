@@ -1,6 +1,5 @@
 return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    enabled = true,
     dependencies = {
         { "williamboman/mason-lspconfig.nvim" },
         {
@@ -17,24 +16,24 @@ return {
     },
     opts = {
         ensure_installed = {
-            "bash-debug-adapter",
-            "bashls",
-            "black",
-            "debugpy",
-            "efm",
-            "isort",
-            "lua_ls",
-            "pyright",
+            general = {
+                "efm",
+                "lua_ls",
+            },
         },
     },
     config = function(_, opts)
+        -- Merge tool opts
+        opts.ensure_installed = vim.tbl_flatten(
+            vim.tbl_values(opts.ensure_installed)
+        )
         require("mason-tool-installer").setup(opts)
 
         vim.api.nvim_create_autocmd("User", {
             pattern = "MasonToolsStartingInstall",
             callback = function()
                 vim.schedule(function()
-                    vim.cmd[[normal q]] -- Try closing open floating windows
+                    vim.cmd([[normal q]]) -- Try closing open floating windows
                     require("mason.ui").open()
                 end)
             end,
