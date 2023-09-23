@@ -52,7 +52,6 @@ return {
                 local languages = {
                     python = { isort, black },
                 }
-                print("Setting up efm")
 
                 local efmls_config = {
                     filetypes = vim.tbl_keys(languages),
