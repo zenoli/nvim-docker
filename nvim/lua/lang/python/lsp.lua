@@ -7,6 +7,7 @@ return {
         efm = {
             python = function()
                 return {
+                    require('efmls-configs.linters.flake8'),
                     require("efmls-configs.formatters.black"),
                     require("efmls-configs.formatters.isort"),
                 }

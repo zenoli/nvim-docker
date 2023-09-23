@@ -7,7 +7,6 @@ return {
         efm = {
             sh = function()
                 return {
-                    require("efmls-configs.linters.shellcheck"),
                     require("efmls-configs.formatters.shfmt")
                 }
             end,

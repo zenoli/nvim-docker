@@ -5,6 +5,7 @@ return {
             python = {
                 "black",
                 "debugpy",
+                "flake8",
                 "isort",
                 "pyright",
             },
