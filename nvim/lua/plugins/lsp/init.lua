@@ -36,28 +36,24 @@ return {
         }
     end)(),
     config = function(_, opts)
-        local lsp_utils = require "plugins.lsp.utils"
+        local lsp_utils = require("plugins.lsp.utils")
         lsp_utils.setup_keybindings()
         lsp_utils.setup_diagnostics(opts.diagnostics)
         lsp_utils.setup_borders(opts.border)
 
-        require "mason-lspconfig".setup_handlers {
+        require("mason-lspconfig").setup_handlers({
             lsp_utils.get_default_handler(opts),
             ["jdtls"] = function()
                 -- TODO
             end,
             ["efm"] = function()
-                local black = require('efmls-configs.formatters.black')
-                local isort = require('efmls-configs.formatters.isort')
-                local languages = {
-                    python = { isort, black },
-                }
-
                 local efmls_config = {
-                    filetypes = vim.tbl_keys(languages),
+                    filetypes = vim.tbl_keys(opts.efm),
                     settings = {
                         rootMarkers = { ".git/" },
-                        languages = languages,
+                        languages = vim.tbl_map(function(x)
+                            return x()
+                        end, opts.efm),
                     },
                     init_options = {
                         documentFormatting = true,
@@ -65,8 +61,8 @@ return {
                     },
                 }
                 local global_opts = lsp_utils.get_global_opts()
-                require('lspconfig').efm.setup(vim.tbl_extend("force", global_opts, efmls_config))
+                require("lspconfig").efm.setup(vim.tbl_extend("force", global_opts, efmls_config))
             end,
-        }
+        })
     end,
 }

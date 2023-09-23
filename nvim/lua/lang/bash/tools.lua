@@ -5,6 +5,8 @@ return {
             bash = {
                 "bash-debug-adapter",
                 "bash-language-server", --bashls
+                "shellcheck",
+                "shfmt",
             },
         },
     },
