@@ -65,16 +65,9 @@ return {
         desc = "Focus stacks window",
     },
     {
-        "<leader>du",
-        function()
-            require "dapui".toggle()
-        end,
-        desc = "Toggle debug UI windows",
-    },
-    {
         "<leader>dt",
         function()
-            require "neotest".run.run { strategy = "dap" }
+            require "dapui".toggle()
         end,
         desc = "Toggle debug UI windows",
     },

@@ -8,9 +8,10 @@ return {
     import = "plugins.dap.aux",
     keys = require "plugins.dap.keybindings",
     config = function(_, opts)
-        require "plugins.dap.debug-signs".setup()
-        require "plugins.dap.utils".register_dapui_handlers()
-
+        local dap_utils = require("plugins.dap.utils")
+        local icons = require("plugins.dap.icons")
+        dap_utils.setup_debug_signs(icons)
+        dap_utils.register_dapui_handlers()
 
         -- Setup language specific adapters/configurations defined in `lang/**/dap.lua`
         local dap = require "dap"

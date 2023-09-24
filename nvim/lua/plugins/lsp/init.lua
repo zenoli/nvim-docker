@@ -12,12 +12,7 @@ return {
         return {
             border = border,
             diagnostics = {
-                signs = {
-                    { name = "DiagnosticSignError", text = " " },
-                    { name = "DiagnosticSignWarn", text = " " },
-                    { name = "DiagnosticSignHint", text = " " },
-                    { name = "DiagnosticSignInfo", text = " " },
-                },
+                signs = require("plugins.lsp.icons"),
                 config = {
                     virtual_text = false,
                     update_in_insert = true,

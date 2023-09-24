@@ -10,8 +10,9 @@ function M.setup_keybindings()
 end
 
 function M.setup_diagnostics(opts)
-    for _, sign in ipairs(opts.signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    for name, icon in pairs(opts.signs) do
+        name = "DiagnosticSign" .. name
+        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
     end
     vim.diagnostic.config(opts.config)
 end

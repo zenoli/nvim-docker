@@ -49,7 +49,7 @@ return {
             }),
             formatting = {
                 format = function(entry, vim_item)
-                    local icons = require("config.icons").kinds
+                    local icons = require("plugins.nvim-cmp.icons")
                     if icons[vim_item.kind] then
                         if entry.source.name == "calc" then
                             vim_item.menu = "[Calc]"
