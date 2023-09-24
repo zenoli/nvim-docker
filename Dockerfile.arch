@@ -16,6 +16,8 @@ ENV PACKAGES " \
   python-pipx \
   python-pynvim \
   ripgrep \
+  texlive-binextra \
+  texlive-latex \
   unzip \
   wget \
 "
@@ -30,8 +32,7 @@ RUN chown -R dev:dev /home/dev
 USER dev
 
 # Copy playground apps
-COPY --chown=dev awesome /home/dev/awesome
-COPY --chown=dev python-pg /home/dev/python-pg
+COPY --chown=dev sample-projects /home/dev/sample-projects
 
 WORKDIR /home/dev
 RUN mkdir .config
