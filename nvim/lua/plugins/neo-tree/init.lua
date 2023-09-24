@@ -9,6 +9,7 @@ return {
     },
     keys = {
         { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle Neotree" },
+        { "<localleader><localleader>", "<cmd>Neotree reveal<cr>", desc = "Reveal current file in Neotree" },
     },
     opts = function()
         local clipboard_icons = {
@@ -16,7 +17,7 @@ return {
             copy = "󰆏 ",
         }
 
-        local navigation = require "plugins.neo-tree.navigation"
+        local navigation = require("plugins.neo-tree.navigation")
         return {
             close_if_last_window = true,
             enable_diagnostics = false,
@@ -33,7 +34,7 @@ return {
                 modified = {
                     symbol = "",
                     highlight = "NeoTreeModified",
-                }
+                },
             },
             window = {
                 position = "left",
@@ -67,7 +68,7 @@ return {
                         ["/"] = "noop", -- "noop" removes a default mapping
                         ["g/"] = "fuzzy_finder",
                         ["q"] = "clear_filter",
-                    }
+                    },
                 },
                 group_empty_dirs = true,
                 use_libuv_file_watcher = true,
@@ -75,20 +76,20 @@ return {
                 scan_mode = "deep",
                 components = {
                     clipboard = function(config, node, state)
-                        local highlights = require "neo-tree.ui.highlights"
+                        local highlights = require("neo-tree.ui.highlights")
                         local clipboard = state.clipboard or {}
                         local clipboard_state = clipboard[node:get_id()]
-                        if not clipboard_state then return {} end
+                        if not clipboard_state then
+                            return {}
+                        end
                         return {
-                            text = clipboard_icons[clipboard_state.action]
-                                or clipboard_state.action,
+                            text = clipboard_icons[clipboard_state.action] or clipboard_state.action,
                             highlight = config.highlight or highlights.DIM_TEXT,
                         }
                     end,
                 },
-
             },
-            event_handlers = require "plugins.neo-tree.event_handlers",
+            event_handlers = require("plugins.neo-tree.event_handlers"),
         }
-    end
+    end,
 }
