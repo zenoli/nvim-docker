@@ -20,6 +20,8 @@ ENV PACKAGES " \
   texlive-latex \
   unzip \
   wget \
+  zathura \
+  zathura-pdf-mupdf \
 "
 
 RUN pacman-key --init
