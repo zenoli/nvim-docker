@@ -38,9 +38,7 @@ return {
 
         require("mason-lspconfig").setup_handlers({
             lsp_utils.get_default_handler(opts),
-            ["jdtls"] = function()
-                -- TODO
-            end,
+            ["jdtls"] = Noop, -- Setup by nvim-jdtls
             ["efm"] = function()
                 local efmls_config = {
                     filetypes = vim.tbl_keys(opts.efm),
