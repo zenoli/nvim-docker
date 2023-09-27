@@ -20,8 +20,6 @@ local M = {
     }
 }
 
-
-
 function M.get_root_dir()
     local fname = vim.api.nvim_buf_get_name(0)
     return require("lspconfig.server_configurations.jdtls").default_config.root_dir(fname)
