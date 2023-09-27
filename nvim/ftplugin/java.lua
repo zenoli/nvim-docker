@@ -28,7 +28,6 @@ local function get_java_17()
     end
 end
 
-get_java_17()
 
 local config = {
     -- The command that starts the language server
