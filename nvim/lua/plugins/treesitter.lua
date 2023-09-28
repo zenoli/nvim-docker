@@ -13,18 +13,6 @@ return {
         "TSEnableAll",
     },
     opts = {
-        ensure_installed = {
-            "lua",
-            "python",
-            "java",
-            "typescript",
-            "javascript",
-            "svelte",
-            "vim",
-            "bash",
-            "css",
-            "markdown"
-        },
         indent = {
             enable = true,
             disable = { "python" },
@@ -53,6 +41,9 @@ return {
         },
     },
     config = function(_, opts)
+        opts.ensure_installed = vim.tbl_flatten(
+            vim.tbl_values(opts.ensure_installed)
+        )
         require "nvim-treesitter.configs".setup(opts)
     end,
 }
