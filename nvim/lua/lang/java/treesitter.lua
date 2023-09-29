@@ -2,7 +2,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
         ensure_installed = {
-            lua = { "lua" },
+            java = { "java", "xml", "groovy" },
         },
     },
 }
