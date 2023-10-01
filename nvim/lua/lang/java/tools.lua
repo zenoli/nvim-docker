@@ -3,7 +3,7 @@ return {
     opts = {
         ensure_installed = {
             java = {
-                "jdtls",
+                -- { 'jdtls', version = '1.27.1' },
                 "java-debug-adapter",
                 "java-test",
             },
