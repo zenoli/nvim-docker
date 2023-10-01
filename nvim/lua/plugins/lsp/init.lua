@@ -4,6 +4,7 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "creativenull/efmls-configs-nvim",
+        "folke/neoconf.nvim",
     },
     import = "plugins.lsp.aux",
     event = { "BufReadPre", "BufNewFile" },
@@ -31,6 +32,7 @@ return {
         }
     end)(),
     config = function(_, opts)
+        require("neoconf").setup({})
         local lsp_utils = require("plugins.lsp.utils")
         lsp_utils.setup_keybindings()
         lsp_utils.setup_diagnostics(opts.diagnostics)

@@ -1,7 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        "folke/neoconf.nvim",
         "folke/neodev.nvim",
     },
     opts = {

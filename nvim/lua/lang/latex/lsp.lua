@@ -1,9 +1,5 @@
 return {
     "neovim/nvim-lspconfig",
-    dependencies = {
-        "folke/neoconf.nvim",
-        "folke/neodev.nvim",
-    },
     opts = function(_, opts)
         return vim.tbl_deep_extend("force", opts, {
             servers = {
