@@ -17,18 +17,17 @@ function M.setup_diagnostics(opts)
     vim.diagnostic.config(opts.config)
 end
 
-function M.setup_borders(border)
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border, silent = true })
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+function M.setup_default_config(opts)
+    local lspconfig = require "lspconfig"
+    lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
+        handlers = {
+            ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = opts.border, silent = true }),
+            ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = opts.border }),
+        },
+        capabilities = require "cmp_nvim_lsp".default_capabilities(),
+    })
 end
 
-function M.get_global_opts()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    require "config.utils".if_module("cmp_nvim_lsp", function(cmp_nvim_lsp)
-        capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-    end, { message = "Required for setting global lsp options" })
-    return { capabilities = capabilities }
-end
 
 local function get_server_config(opts, server)
     local default = {
@@ -39,12 +38,10 @@ local function get_server_config(opts, server)
 end
 
 function M.get_default_handler(opts)
-    local global_opts = M.get_global_opts()
     return function(server)
         local server_config = get_server_config(opts, server)
         server_config.setup()
-
-        require "lspconfig"[server].setup(vim.tbl_deep_extend("force", global_opts, server_config.opts))
+        require "lspconfig"[server].setup(server_config.opts)
     end
 end
 

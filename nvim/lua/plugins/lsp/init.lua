@@ -13,7 +13,7 @@ return {
         return {
             border = border,
             diagnostics = {
-                signs = require("plugins.lsp.icons"),
+                signs = require "plugins.lsp.icons",
                 config = {
                     virtual_text = false,
                     update_in_insert = true,
@@ -32,15 +32,16 @@ return {
         }
     end)(),
     config = function(_, opts)
-        require("neoconf").setup({})
-        local lsp_utils = require("plugins.lsp.utils")
+        require "neoconf".setup {}
+        local lsp_utils = require "plugins.lsp.utils"
         lsp_utils.setup_keybindings()
         lsp_utils.setup_diagnostics(opts.diagnostics)
-        lsp_utils.setup_borders(opts.border)
+        lsp_utils.setup_default_config(opts)
 
-        require("mason-lspconfig").setup_handlers({
+
+        require "mason-lspconfig".setup_handlers {
             lsp_utils.get_default_handler(opts),
-            ["jdtls"] = Noop, -- Setup by nvim-jdtls
+            ["jdtls"] = Noop,    -- Setup by nvim-jdtls
             ["tsserver"] = Noop, -- Setup by typescript-tools.nvim
             ["efm"] = function()
                 local efmls_config = {
@@ -56,9 +57,8 @@ return {
                         documentRangeFormatting = true,
                     },
                 }
-                local global_opts = lsp_utils.get_global_opts()
-                require("lspconfig").efm.setup(vim.tbl_extend("force", global_opts, efmls_config))
+                require "lspconfig".efm.setup(efmls_config)
             end,
-        })
+        }
     end,
 }
