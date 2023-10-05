@@ -16,7 +16,7 @@ return {
             dashboard.button("f", "   Find file", ":Telescope find_files<cr>"),
             dashboard.button("r", "   Recent", ":Telescope oldfiles<cr>"),
             dashboard.button("s", "   Settings", ":e $MYVIMRC | :cd %:p:h<cr>"),
-            dashboard.button("q", "   Quit NVIM", ":qa<CR>"),
+            dashboard.button("q", "   Quit Zenovim", ":qa<CR>"),
         }
 
         alpha.setup(dashboard.opts)
