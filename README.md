@@ -1,5 +1,11 @@
 # Neovim Docker
 
+## Installation
+
+```shell
+git clone --recurse-submodules git@github.com:zenoli/zenovim-docker.git
+```
+
 ## Setup
 
 Build: `./scripts/zenovim-build.sh [TAG]` - Builds the image
@@ -7,10 +13,12 @@ Run: `./scripts/zenovim-launch.sh [TAG]` - Runs the image
 Attach: `./scripts/zenovim-attach.sh` - Attaches to the running image with `bash`
 
 ### Tags
+
 Currently we provide two tags:
 - `arch` - Based on archlinux
 - `alpine` - Based on alpine linux
 
 
 ### Running container as root
+
 `docker exec -u 0 -it zenovim bash`
