@@ -1,0 +1,3 @@
+[submodule "zenovim"]
+	path = zenovim
+	url = git@github.com:zenoli/zenovim.git
